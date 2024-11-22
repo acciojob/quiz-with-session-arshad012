@@ -2,6 +2,10 @@
 
 // Do not change code below this line
 // This code will just display the questions to the screen
+const questionsElement = document.getElementById('questions');
+const output = document.getElementById('score');
+
+
 const questions = [
   {
     question: "What is the capital of France?",
@@ -30,6 +34,14 @@ const questions = [
   },
 ];
 
+
+
+
+// localStorage.removeItem('score');
+// let arr = [null,null, null, null, null];
+// localStorage.setItem('answerKeys', JSON.stringify(arr));
+let userAnswers = JSON.parse(localStorage.getItem('answerKeys'));
+
 // Display the quiz questions and choices
 function renderQuestions() {
   for (let i = 0; i < questions.length; i++) {
@@ -43,6 +55,10 @@ function renderQuestions() {
       choiceElement.setAttribute("type", "radio");
       choiceElement.setAttribute("name", `question-${i}`);
       choiceElement.setAttribute("value", choice);
+		choiceElement.onchange = () => {
+			userAnswers[i] = choice;
+			localStorage.setItem('answerKeys', JSON.stringify(userAnswers));
+		}
       if (userAnswers[i] === choice) {
         choiceElement.setAttribute("checked", true);
       }
@@ -53,4 +69,24 @@ function renderQuestions() {
     questionsElement.appendChild(questionElement);
   }
 }
+
 renderQuestions();
+
+
+document.getElementById('submit').addEventListener('click', () => {
+	
+	let score = 0;
+	let userAllAnswers = JSON.parse(localStorage.getItem('answerKeys'));
+	for(let i=0; i<questions.length; i++) {
+		if(questions[i].answer == userAllAnswers[i]) {
+			score++;
+		}
+	}
+
+	output.innerText = `Your score is ${score} out of 5.`;
+	localStorage.setItem('score', JSON.stringify(score));
+})
+
+let totalScore = JSON.parse(localStorage.getItem('score'));
+output.innerText = `Your score is ${totalScore} out of 5.`;
+
