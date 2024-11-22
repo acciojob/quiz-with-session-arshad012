@@ -41,6 +41,7 @@ const questions = [
 // let arr = [null,null, null, null, null];
 // localStorage.setItem('answerKeys', JSON.stringify(arr));
 let userAnswers = JSON.parse(localStorage.getItem('answerKeys'));
+// localStorage.setItem('score', JSON.stringify(0));
 
 // Display the quiz questions and choices
 function renderQuestions() {
