@@ -37,11 +37,11 @@ const questions = [
 
 
 
-// localStorage.removeItem('score');
+// sessionStorage.removeItem('score');
 // let arr = [null,null, null, null, null];
-// localStorage.setItem('answerKeys', JSON.stringify(arr));
-let userAnswers = JSON.parse(localStorage.getItem('answerKeys'));
-// localStorage.setItem('score', JSON.stringify(0));
+// sessionStorage.setItem('answerKeys', JSON.stringify(arr));
+let userAnswers = JSON.parse(sessionStorage.getItem('answerKeys'));
+// sessionStorage.setItem('score', JSON.stringify(0));
 
 // Display the quiz questions and choices
 function renderQuestions() {
@@ -58,7 +58,7 @@ function renderQuestions() {
       choiceElement.setAttribute("value", choice);
 		choiceElement.onchange = () => {
 			userAnswers[i] = choice;
-			localStorage.setItem('answerKeys', JSON.stringify(userAnswers));
+			sessionStorage.setItem('answerKeys', JSON.stringify(userAnswers));
 		}
       if (userAnswers[i] === choice) {
         choiceElement.setAttribute("checked", true);
@@ -77,7 +77,7 @@ renderQuestions();
 document.getElementById('submit').addEventListener('click', () => {
 	
 	let score = 0;
-	let userAllAnswers = JSON.parse(localStorage.getItem('answerKeys'));
+	let userAllAnswers = JSON.parse(sessionStorage.getItem('answerKeys'));
 	for(let i=0; i<questions.length; i++) {
 		if(questions[i].answer == userAllAnswers[i]) {
 			score++;
@@ -85,9 +85,9 @@ document.getElementById('submit').addEventListener('click', () => {
 	}
 
 	output.innerText = `Your score is ${score} out of 5.`;
-	localStorage.setItem('score', JSON.stringify(score));
+	sessionStorage.setItem('score', JSON.stringify(score));
 })
 
-let totalScore = JSON.parse(localStorage.getItem('score'));
+let totalScore = JSON.parse(sessionStorage.getItem('score'));
 output.innerText = `Your score is ${totalScore} out of 5.`;
 
