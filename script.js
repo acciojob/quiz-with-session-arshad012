@@ -35,13 +35,8 @@ const questions = [
 ];
 
 
-
-
-// sessionStorage.removeItem('score');
-// let arr = [null,null, null, null, null];
-// sessionStorage.setItem('answerKeys', JSON.stringify(arr));
-let userAnswers = JSON.parse(sessionStorage.getItem('answerKeys'));
-// sessionStorage.setItem('score', JSON.stringify(0));
+let userAnswers = JSON.parse(sessionStorage.getItem('answerKeys')) || [null,null, null, null, null];
+sessionStorage.setItem('answerKeys', JSON.stringify(userAnswers));
 
 // Display the quiz questions and choices
 function renderQuestions() {
