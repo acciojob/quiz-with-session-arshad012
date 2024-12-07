@@ -35,6 +35,9 @@ const questions = [
 ];
 
 
+
+sessionStorage.setItem('score', JSON.stringify(0));
+
 let userAnswers = JSON.parse(sessionStorage.getItem('answerKeys')) || [null,null, null, null, null];
 sessionStorage.setItem('answerKeys', JSON.stringify(userAnswers));
 
@@ -68,7 +71,6 @@ function renderQuestions() {
 
 renderQuestions();
 
-
 document.getElementById('submit').addEventListener('click', () => {
 	
 	let score = 0;
@@ -78,11 +80,15 @@ document.getElementById('submit').addEventListener('click', () => {
 			score++;
 		}
 	}
-
+	
 	output.innerText = `Your score is ${score} out of 5.`;
 	sessionStorage.setItem('score', JSON.stringify(score));
 })
 
-let totalScore = JSON.parse(sessionStorage.getItem('score'));
-output.innerText = `Your score is ${totalScore} out of 5.`;
+
+
+// let totalScore = JSON.parse(sessionStorage.getItem('score'));
+// if(totalScore) {
+// 	output.innerText = `Your score is ${totalScore} out of 5.`;
+// }
 
