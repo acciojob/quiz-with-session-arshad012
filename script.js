@@ -35,7 +35,7 @@ const questions = [
 ];
 
 
-
+sessionStorage.setItem('foo', 'bar');
 sessionStorage.setItem('score', JSON.stringify(0));
 
 let userAnswers = JSON.parse(sessionStorage.getItem('answerKeys')) || [null,null, null, null, null];
